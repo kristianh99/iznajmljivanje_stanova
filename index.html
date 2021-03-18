@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Iznajmljivanje-kuca-stanova</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="main">
+            <div class="logo">
+                <img src="logo.png" alt="logo">
+            </div>
+            <ul>
+                <li><a href="#">Početna</a></li>
+                <li><a href="#">O nama</a></li>
+                <li><a href="#">Kontakt</a></li>
+                <li><a href="#">Postavi oglas</a></li>
+                <li><a href="#">PRIJAVI SE</a></li>
+            </ul>
+        </div>
+        <div class="title">
+            <h1>IZNAJMI KUĆU\STAN</h1>
+        </div>
+    </header>
+    <div class="search">
+
+        <label for="city">Odaberi grad:</label>
+        <select id="city">
+            <option value="0">Subotica</option>
+            <option value="1">Beograd</option>
+            <option value="2">Novi Sad</option>
+        </select>
+
+            <label for="apartment">Stan ili kuća:</label>
+            <select id="apartment">
+                <option value="0">Stan</option>
+                <option value="1">Kuća</option>
+            </select>
+        <label for="area"></label>
+        <input id="area" type="number" name="Povrsina" placeholder="Povrsina od" >
+        <label>m<sup>2</sup></label>
+        <label for="price"></label>
+        <input id="price" name="Cena" type="number" placeholder="Cena do"> <label>&euro;</label>
+    </div>
+<div class="search-button">
+    <button class="button-search">Pretraga</button>
+</div>
+</body>
+</html>
