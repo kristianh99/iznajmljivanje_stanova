@@ -46,7 +46,7 @@ require_once 'config.php';
             <li><a href="../index.php">Početna</a></li>
             <li><a href="../o_nama.php">O nama</a></li>
             <li><a href="../kontakt.php">Kontakt</a></li>
-            <li><a href="#">Postavi oglas</a></li>
+            <li><a href="../postavi_oglas.php">Postavi oglas</a></li>
 
         </ul>
     </div >
