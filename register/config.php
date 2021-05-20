@@ -3,7 +3,7 @@ define("SITE", "localhost/iznajmljivanje_stanova/iznajmljivanje_stanova/register
 define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "");
-define("DATABASE", "wp");
+define("DATABASE", "flat_renting");
 define("SECRET", "gfhUi34xVbds23Qgk");
 
 $actions = ['login', 'register', 'forget'];
