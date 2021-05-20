@@ -62,4 +62,8 @@ ul li a:hover{
     background-color: #000;
     color: #fff;
 }
-fo
+
+div .loggedin{
+    width: 100%;
+    text-align: center;
+}
