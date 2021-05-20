@@ -30,7 +30,13 @@ if (!isset($_SESSION['username']) OR !isset($_SESSION['id_user']) OR !is_int($_S
             <li><a href="o_nama.php">O nama</a></li>
             <li><a href="#">Kontakt</a></li>
             <li><a href="#">Postavi oglas</a></li>
-            <li><a href="register/index.php">PRIJAVI SE</a></li>
+            <?php
+            if($loggedin){
+                echo "<li><a href='register/logout.php'>Odjavi se</a></li>";
+            }else{
+                echo "<li><a href='register/index.php'>Prijavi se</a>";
+            }
+            ?>
         </ul>
     </div >
 </nav>
