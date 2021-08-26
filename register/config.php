@@ -1,9 +1,9 @@
 <?php
-define("SITE", "localhost/iznajmljivanje_stanova/iznajmljivanje_stanova/register/");
+define("SITE", "https://hyper.proj.vts.su.ac.rs/register");
 define("HOST", "localhost");
-define("USER", "root");
-define("PASSWORD", "");
-define("DATABASE", "flat_renting");
+define("USER", "hyper");
+define("PASSWORD", "drcj8uurUrQdI3e");
+define("DATABASE", "hyper");
 define("SECRET", "gfhUi34xVbds23Qgk");
 
 $actions = ['login', 'register', 'forget'];
@@ -20,5 +20,8 @@ $messages = [
     8 => 'Format of e-mail address is not valid!',
     9 => 'Password is too short! It must be minimum 8 characters long!',
     10 => 'Something went wrong with mail server. We will try to send email later!',
-    11 => 'Your account is already activated!'
+    11 => 'Your account is already activated!',
+    12 => 'Your account is has been updated!',
+    13 => 'Your account is has been updated!',
+    14 => 'Check your e-mail inbox!',
 ];

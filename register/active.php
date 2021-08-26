@@ -5,14 +5,13 @@ require "db_config.php";
 require "functions_def.php";
 
 $code = "";
-// https://localhost/wp_2021/7/register/active.php?code=MdmydusJtspohrOwtsmbuInuhxelKvlxospPpjvx
 
 if (isset($_GET['code'])){
     $code = mysqli_real_escape_string($connection, trim($_GET['code']));
 }
     
 if (!empty($code) AND strlen($code) === 40) {
-    $sql = "UPDATE users_web SET active='1', code='', registration_expires=''
+    $sql = "UPDATE users SET active='1', code='', registration_expires=''
             WHERE  binary code = '$code' AND registration_expires>now()";
 
     $result = mysqli_query($connection, $sql) or die(mysqli_error($connection));

@@ -10,13 +10,10 @@ $firstname = "";
 $lastname = "";
 $email = "";
 $action = "";
+$phone="";
 
 $referer = $_SERVER['HTTP_REFERER'];
 $action = mysqli_real_escape_string($connection, $_POST["action"]);
-
-
-// 'HTTP_REFERER' => string 'https://localhost/wp_2021/7/register/index.php?l=0'
-// "https://localhost/wp_2021/7/register/"
 
 if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !== false) {
 
@@ -34,6 +31,10 @@ if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !==
                     // session_regenerate_id();
                     $_SESSION['username'] = $username;
                     $_SESSION['id_user'] = $data['id_user'];
+                    $_SESSION['user_type'] = $data['user_type'];
+                    // if($data['user_type']==1) redirection('../admin/');
+                    // if($data['user_type']==2) redirection('../employee/');
+                    // if($data['user_type']==3) redirection('../quest/');
                     redirection('../index.php');
                 } else {
                     redirection('index.php?l=1');
@@ -47,9 +48,7 @@ if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !==
 
         case "register" :
 
-            if(isset($_POST['username'])) {
-                $username = mysqli_real_escape_string($connection, trim($_POST["username"]));
-            }
+
            
             if(isset($_POST['firstname'])) {
                 $firstname = mysqli_real_escape_string($connection, trim($_POST["firstname"]));
@@ -65,21 +64,27 @@ if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !==
 
             if (isset($_POST['passwordConfirm'])) {
                 $passwordConfirm = mysqli_real_escape_string($connection, trim($_POST["passwordConfirm"])); 
-            } 
-           
+            }
+
+            if (isset($_POST['phone'])) {
+                $phone = mysqli_real_escape_string($connection, trim($_POST["phone"]));
+            }
+
             if (isset($_POST['email'])) {
                  $email = mysqli_real_escape_string($connection, trim($_POST["email"]));
             }
 
-            if (empty($username)) {
-                redirection('index.php?r=4');
-            }
+
 
             if (empty($firstname)) {
                 redirection('index.php?r=4');
             }
 
             if (empty($lastname)) {
+                redirection('index.php?r=4');
+            }
+
+            if (empty($phone)) {
                 redirection('index.php?r=4');
             }
 
@@ -100,14 +105,15 @@ if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !==
             }
 
             if (!existsUser($username)) {
+                $username=$email;
                 $code = createCode(40);
-                $id_user_web = registerUser($username, $password, $firstname, $lastname, $email, $code);
-                if (sendData($username, $email, $code)) {
-                    redirection("index.php?r=3");
-                } else {
-                    addEmailFailure($id_user_web);
-                    redirection("index.php?r=10");
-                }
+                $id_user_web = registerUser($username, $password, $firstname, $lastname, $email, $code,$phone);
+                // if (sendData($username, $email, $code)) {
+                //     redirection("index.php?r=3");
+                // } else {
+                //     addEmailFailure($id_user_web);
+                //     redirection("index.php?r=10");
+                // }
 
             } else {
                 redirection('index.php?r=2');
@@ -116,7 +122,24 @@ if ($action != "" AND in_array($action, $actions) AND strpos($referer, SITE) !==
             break;
 
         case "forget" :
-            // To do
+            $email = mysqli_real_escape_string($connection, trim($_POST["email"]));
+            if (existsUser($email)) {
+                $code = createCode(40);
+                $expFormat = mktime(
+                    date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
+                    );
+                
+                $expDate = date("Y-m-d H:i:s",$expFormat);
+                if (setCodePassword($email,$code,$expDate)) {
+                    sendForgotPassword($username, $email, $code);
+                    redirection("index.php?r=14");
+                } else {
+                    redirection("index.php?r=10");
+                }
+
+            } else {
+                redirection('index.php?r=2');
+            }
             break;
 
         default:
